@@ -128,3 +128,7 @@ check.addEventListener("click", () => {
     alert("Wrong!");
   }
 });
+
+document.addEventListener("keyup", (e) => {
+    console.log(e.code);
+})
