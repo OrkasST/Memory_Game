@@ -1,0 +1,116 @@
+*{
+    padding:0;
+    margin:0;
+    font-size: 32px;
+  }
+  body{
+    background-color: #DDD;
+  }
+  #resultPanel {
+    position: absolute;
+    bottom:0;
+    padding-bottom: 2rem;
+    
+    height: 24rem;
+    width: 100vw;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    border-top: 1px solid #757575;
+    box-shadow: 0 1rem 2rem 0.8rem rgba(45,45,45,0.3), 
+       0 0.3rem 0.8rem 0.2rem rgba(35,35,35,0.4);
+    background-color: #fff;
+  }
+  #result {
+    width: 50%;
+    height: 3rem;
+    
+    margin-right: 1rem;
+    border-radius: 0.4rem;
+    border: 2px solid #353535;
+    color: #787878;
+    font-size: 1.3rem;
+    padding-left: 2.5rem;
+    display: flex;
+    align-items: center;
+  }
+  #check {
+    height: 3rem;
+    width: 20%;
+    border-radius: 0.4rem;
+    font-size: 1.3rem;
+  }
+  #screen {
+    position: fixed;
+    width: 100vw;
+    height: 15rem;
+    /*border-bottom: 1px solid #000;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem;
+  }
+  #numpad{
+    width: 20rem;
+    height: 15rem;
+    margin-top: -2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 4.5rem);
+    grid-template-rows: repeat(4, 3rem);
+    
+    grid-template-areas: 
+    "one two three mns" 
+    "four five six mns"
+    "seven eight nine ."
+    "clr zero ers .";
+    justify-content: space-between;
+    align-content: space-between;
+  }
+  #numpad button{
+    font-size: 1.5rem;
+  }
+  ._btn-shadow {
+    box-shadow: 0.2rem 0.2rem 0.5rem 0.1rem rgba(45,45,45,0.3);
+  }
+  .btn-1 {
+    grid-area: one;
+  }
+  .btn-2 {
+    grid-area: two;
+  }
+  .btn-3 {
+    grid-area: three;
+  }
+  .btn-4 {
+    grid-area: four;
+  }
+  .btn-5 {
+    grid-area: five;
+  }
+  .btn-6 {
+    grid-area: six;
+  }
+  .btn-7 {
+    grid-area: seven;
+  }
+  .btn-8 {
+    grid-area: eight;
+  }
+  .btn-9 {
+    grid-area: nine;
+  }
+  .btn-0 {
+    grid-area: zero;
+  }
+  .btn-clr {
+    grid-area: clr;
+  }
+  .btn-ers {
+    grid-area: ers;
+  }
+  .btn-minus {
+    grid-area: mns;
+  }
