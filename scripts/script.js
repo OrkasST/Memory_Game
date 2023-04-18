@@ -3,28 +3,28 @@ const screen = document.getElementById("screen");
 const result = document.getElementById("result");
 const check = document.getElementById("check");
 
+const correct = document.getElementById("correct");
+const wrong = document.getElementById("wrong");
+
 let correctAnswer = 0;
 let numbers = [];
 let userAnswer = 0;
 let task = "";
+let score = {
+  correct: 0,
+  wrong: 0
+}
 
 const countAnswer = () => {
   let isSimplified = false;
-  let multiply = -1,
-    divide = -1,
-    plus = -1,
-    minus = -1;
   let counter = 10;
   while (numbers.length > 1 && counter > 0) {
     counter--;
 
-    if (isSimplified || (multiply < 0 && divide < 0)) {
       plus = numbers.indexOf("+");
       minus = numbers.indexOf("-");
-    } else if (!isSimplified) {
       multiply = numbers.indexOf("*");
       divide = numbers.indexOf("/");
-    }
     console.group("MG");
     console.log("plus: ", plus, ", minus: ", minus, ", multiply: ", multiply, ", divide: ", divide);
     console.log(numbers);
@@ -60,28 +60,23 @@ const chooseNumbers = (level = 1) => {
   for (let i = 0; i < max; i++) {
     let number = Math.floor(Math.random() * (Math.pow(10, level) - 1) + 1);
     if (i === 0) {
-      //correctAnswer = number;
       numbers = [number];
     } else {
-      let sign = Math.floor(Math.random() * 2);
+      let sign = Math.floor(Math.random() * 3);
       switch (sign) {
         case 0:
-          //correctAnswer += number;
           numbers.push("+", number);
           task += " + " + number;
           break;
         case 1:
-          //correctAnswer -= number;
           numbers.push("-", number);
           task += " - " + number;
           break;
         case 2:
-          //correctAnswer *= number;
           numbers.push("*", number);
           task += " * " + number;
           break;
         case 3:
-          //correctAnswer /= number;
           numbers.push("/", number);
           task += " / " + number;
           break;
@@ -132,8 +127,10 @@ const checkResult = () => {
   if (userAnswer === correctAnswer) {
     result.innerText = "Result";
     chooseNumbers();
+    correct.innerText = ++score.correct;
   } else {
     alert("Wrong!");
+    wrong.innerText = ++score.wrong;
   }
 };
 
