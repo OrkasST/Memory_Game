@@ -23,26 +23,34 @@ const countAnswer = () => {
       minus = numbers.indexOf("-");
     } else if (!isSimplified) {
       multiply = numbers.indexOf("*");
-      divide = numbers.indexOf("*");
+      divide = numbers.indexOf("/");
     }
-
-
-    if (multiply > 0 && multiply < divide) {
+    console.group("MG");
+    console.log("plus: ", plus, ", minus: ", minus, ", multiply: ", multiply, ", divide: ", divide);
+    console.log(numbers);
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    if (multiply > 0 && (multiply < divide || divide < 0)) {
       numbers.splice(
         multiply - 1,
         3,
         numbers[multiply - 1] * numbers[multiply + 1]
       );
+      console.log("numbers: ", numbers);
     } else if (divide > 0) {
       numbers.splice(divide - 1, 3, numbers[divide - 1] / numbers[divide + 1]);
-    } else if (plus > 0 && plus < minus) {
+      console.log("numbers: ", numbers);
+    } else if (plus > 0 && (plus < minus || minus < 0)) {
       numbers.splice(plus - 1, 3, numbers[plus - 1] + numbers[plus + 1]);
+      console.log("numbers: ", numbers);
     } else if (minus > 0) {
       numbers.splice(minus - 1, 3, numbers[minus - 1] - numbers[minus + 1]);
+      console.log("numbers: ", numbers);
     }
-
+    console.groupEnd();
   }
   correctAnswer = numbers[0];
+  console.log('correctAnswer: ', correctAnswer);
+
 };
 
 const chooseNumbers = (level = 1) => {
@@ -119,7 +127,7 @@ for (let i = 0; i < buttons.length; i++) {
   });
 }
 
-check.addEventListener("click", () => {
+const checkResult = () => {
   userAnswer = parseInt(result.innerText);
   if (userAnswer === correctAnswer) {
     result.innerText = "Result";
@@ -127,8 +135,26 @@ check.addEventListener("click", () => {
   } else {
     alert("Wrong!");
   }
-});
+};
+
+check.addEventListener("click", checkResult);
 
 document.addEventListener("keyup", (e) => {
-    console.log(e.code);
-})
+  console.log(e.code);
+  const reg = /[0-9]/gi;
+  let last = e.code.substring(e.code.length - 1, e.code.length);
+  if (reg.test(last)) {
+    if (result.innerText === "Result") result.innerText = "";
+    result.innerText += last;
+  } else if (e.code === "Backspace") {
+    result.innerText = result.innerText.substring(
+      0,
+      result.innerText.length - 1
+    );
+  } else if (e.code === "NumpadEnter" || e.code === "Enter") checkResult();
+  else if (e.code === "NumpadSubtract" || e.code === "Minus") {
+    if (result.innerText === "Result") result.innerText = "";
+    result.innerText += "-";
+  }
+  console.log("last : ", last);
+});
