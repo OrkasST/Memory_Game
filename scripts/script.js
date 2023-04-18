@@ -3,10 +3,17 @@ const screen = document.getElementById("screen");
 const result = document.getElementById("result");
 const check = document.getElementById("check");
 
+const correct = document.getElementById("correct");
+const wrong = document.getElementById("wrong");
+
 let correctAnswer = 0;
 let numbers = [];
 let userAnswer = 0;
 let task = "";
+let score = {
+  correct: 0,
+  wrong: 0
+}
 
 const countAnswer = () => {
   let isSimplified = false;
@@ -120,8 +127,10 @@ const checkResult = () => {
   if (userAnswer === correctAnswer) {
     result.innerText = "Result";
     chooseNumbers();
+    correct.innerText = ++score.correct;
   } else {
     alert("Wrong!");
+    wrong.innerText = ++score.wrong;
   }
 };
 
